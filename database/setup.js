@@ -21,3 +21,8 @@ async function setupDatabase() {
          console.error('Unable to connect to the database:', error); 
     } 
 }
+
+// Run setup if this file is executed directly
+if (require.main === module) {
+    setupDatabase();
+}
