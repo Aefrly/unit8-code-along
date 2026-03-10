@@ -1,4 +1,4 @@
-import { Book, db } from './setup.js';
+const { Book, db } = require('./setup.js');
 
 
 // Sample book data
@@ -105,6 +105,6 @@ async function seedDatabase() {
 }
 
 // Run seeding if this file is executed directly
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (require.main === module) {
     seedDatabase();
 }
