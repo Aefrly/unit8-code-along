@@ -8,6 +8,37 @@ const db = new Sequelize({
     logging: console.log // Not necessary, but shows SQL queries in the console 
 });
 
+const Book = db.define('Book', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    author: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    isbn: {
+        type: DataTypes.STRING,
+        unique: true
+    },
+    genre: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    publishedYear: {
+        type: DataTypes.INTEGER
+    },
+    available: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+    }
+});
+
 async function setupDatabase() { 
     try { 
         await db.authenticate(); 
@@ -21,6 +52,8 @@ async function setupDatabase() {
          console.error('Unable to connect to the database:', error); 
     } 
 }
+
+module.exports = Book;
 
 // Run setup if this file is executed directly
 if (require.main === module) {
