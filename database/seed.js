@@ -1,4 +1,4 @@
-
+import { Book, db } from './setup.js';
 
 
 // Sample book data
@@ -86,3 +86,25 @@ const sampleBooks = [
 ];
 
 // Seed database using Sequelize model
+async function seedDatabase() {
+    try {
+        // Insert sample books into the database
+        await Book.bulkCreate(sampleBooks);
+        console.log('Sample books inserted successfully!');
+
+        // Query the database to verify insertion
+        const allBooks = await Book.findAll();
+        console.log(`Total books in database: ${allBooks.length}`);
+
+        // Close the database connection
+        await db.close();
+    } catch (error) {
+        console.error('Error seeding database:', error);
+        await db.close();
+    }
+}
+
+// Run seeding if this file is executed directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+    seedDatabase();
+}
