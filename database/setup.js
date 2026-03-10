@@ -53,7 +53,7 @@ async function setupDatabase() {
     } 
 }
 
-module.exports = Book;
+module.exports = { Book, db };
 
 // Run setup if this file is executed directly
 if (require.main === module) {
